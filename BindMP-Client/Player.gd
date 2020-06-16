@@ -34,7 +34,6 @@ func _process(delta):
 		input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 		input_vector = input_vector.normalized()
-		
 		var move_dir = Vector2()
 		
 		if input_vector != Vector2.ZERO:

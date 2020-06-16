@@ -11,8 +11,6 @@ var velocity = Vector2.ZERO
 var faceDirection = Vector2.ZERO
 var bulletSpawnSpot = Vector2.ZERO
 
-const SPEED = 300
-
 puppet var puppet_pos
 puppet var puppet_vel = Vector2()
 
@@ -30,6 +28,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_network_master():
+		
+		#if Input.is_action_just_pressed("Attack"): 
+		
 		var input_vector = Vector2.ZERO
 		input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -46,12 +47,6 @@ func _process(delta):
 		
 		rset_unreliable("puppet_pos", position)
 		rset_unreliable("puppet_vel", velocity)
-		
-		if Input.is_action_just_pressed("Attack"): 
-			var bulletInstance = BulletNode.instance()
-			bulletInstance.direction = faceDirection
-			bulletInstance.global_position = faceDirection * bulletInstance.SPAWN_MARGIN + global_position
-			get_parent().add_child(bulletInstance)
 	else:
 		# If we are not the ones controlling this player, 
 		# sync to last known position and velocity

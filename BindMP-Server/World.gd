@@ -18,7 +18,7 @@ puppetsync func spawn_player(spawn_pos, id):
 puppetsync func remove_player(id):
 	$Players.get_node(String(id)).queue_free()
 	
-puppetsync func spawn_bullet(spawn_pos, faceDirection):
+puppetsync func spawn_bullet(faceDirection,spawn_pos):
 	var bulletInstance = BulletNode.instance()
 	bulletInstance.direction = faceDirection
 	bulletInstance.global_position = faceDirection * bulletInstance.SPAWN_MARGIN + spawn_pos

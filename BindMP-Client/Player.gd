@@ -29,7 +29,8 @@ func _ready():
 func _process(delta):
 	if is_network_master():
 		
-		#if Input.is_action_just_pressed("Attack"): 
+		if Input.is_action_just_pressed("Attack"): 
+			gamestate.fire(faceDirection,global_position)
 		
 		var input_vector = Vector2.ZERO
 		input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")

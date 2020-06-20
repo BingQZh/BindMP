@@ -81,6 +81,6 @@ puppet func pre_start_game():
 	# Tell Server we ready to roll
 	rpc_id(1, "populate_world")
 
-
-
+puppet func fire(pos,dir):
+	rpc_id(1,"fire_bullet",pos,dir)
  

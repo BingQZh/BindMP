@@ -76,3 +76,7 @@ remote func populate_world():
 # Return random 2D vector inside bounds 0, 0, bound_x, bound_y
 func random_vector2(bound_x, bound_y):
 	return Vector2(randf() * bound_x, randf() * bound_y)
+
+remote func fire_bullet(spawn_dir, spawn_pos):
+	var world = get_node("/root/World")
+	world.rpc("spawn_bullet",spawn_dir, spawn_pos)

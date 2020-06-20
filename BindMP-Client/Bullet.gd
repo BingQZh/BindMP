@@ -12,7 +12,16 @@ export var FRICTION = 500
 var velocity = Vector2.ZERO
 var direction =  Vector2.ZERO
 
+puppet var puppet_pos
+puppet var puppet_vel = Vector2()
 
 func _physics_process(delta):
-	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION)
-	move_and_slide(velocity)	
+	if is_network_master():
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION)
+		move_and_slide(velocity)
+		rset_unreliable("puppet_pos", position)
+		rset_unreliable("puppet_vel", velocity)
+	else:
+		position = puppet_pos
+		velocity = puppet_vel
+	

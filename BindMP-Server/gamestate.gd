@@ -9,13 +9,11 @@ const MAX_PLAYERS = 12
 # Players dict stored as id:name
 var players = {}
 
-
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
 	
 	create_server()
-
 
 func create_server():
 	var host = NetworkedMultiplayerENet.new()

@@ -1,10 +1,10 @@
-extends Sprite
+extends KinematicBody2D
 
 const SPEED = 300
 var velocity = Vector2()
 
-puppet var puppet_pos
-puppet var puppet_vel = Vector2()
+puppetsync var puppet_pos
+puppetsync var puppet_vel = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

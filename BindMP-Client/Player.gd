@@ -28,8 +28,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_network_master():
-		
-		if Input.is_action_just_pressed("Attack"): 
+		if Input.is_action_just_pressed("attack"): 
 			gamestate.fire(faceDirection,global_position)
 		
 		var input_vector = Vector2.ZERO

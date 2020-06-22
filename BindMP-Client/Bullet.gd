@@ -13,12 +13,22 @@ puppet var puppet_pos
 puppet var puppet_vel = Vector2()
 
 func _ready():
+	print(direction)
 	puppet_pos = position
 	
 func _physics_process(delta):
-	position = puppet_pos
+	print(velocity)
+	if is_network_master():
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION)
+		move_and_slide(velocity)	
+		rset_unreliable("puppet_pos", position)
+		rset_unreliable("puppet_vel", velocity)
+	else:
+		position = puppet_pos
+		velocity = puppet_vel
 	position += velocity * delta
-	puppet_pos = position
-	
+	if not is_network_master():
+		puppet_pos = position
+		
 func _on_Timer_timeout():
 	queue_free()

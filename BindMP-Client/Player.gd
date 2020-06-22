@@ -14,7 +14,6 @@ var bulletSpawnSpot = Vector2.ZERO
 puppet var puppet_pos
 puppet var puppet_vel = Vector2()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if is_network_master():
 		$NameLabel.text = "You"
@@ -24,12 +23,11 @@ func _ready():
 		
 		puppet_pos = position # Just making sure we initilize it
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_network_master():
+		
 		if Input.is_action_just_pressed("attack"): 
-			gamestate.fire(faceDirection,global_position)
+			rpc("spawn_bullet",faceDirection,global_position)
 		
 		var input_vector = Vector2.ZERO
 		input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -61,3 +59,10 @@ func _process(delta):
 		# we will keep jumping back until controlling player sends next position update.
 		# Therefore, we update puppet_pos to minimize jitter problems
 		puppet_pos = position
+
+remotesync func spawn_bullet(faceDirection,spawn_pos):
+	print("Client: Spawn bullets")
+	var bulletInstance = load("res://Bullet.tscn").instance()
+	bulletInstance.direction = faceDirection
+	bulletInstance.global_position = faceDirection * bulletInstance.SPAWN_MARGIN + spawn_pos
+	$Bullets.add_child(bulletInstance)

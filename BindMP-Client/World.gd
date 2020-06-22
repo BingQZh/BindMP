@@ -13,7 +13,3 @@ puppet func spawn_player(spawn_pos, id):
 puppet func remove_player(id):
 	$Players.get_node(String(id)).queue_free()
 	
-puppet func spawn_bullet(faceDirection,spawn_pos):
-	var bulletInstance = BulletNode.instance()
-	bulletInstance.position = faceDirection * bulletInstance.SPAWN_MARGIN + spawn_pos
-	$Bullets.add_child(bulletInstance)

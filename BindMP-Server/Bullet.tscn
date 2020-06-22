@@ -64,7 +64,6 @@ script = ExtResource( 2 )
 position = Vector2( 0.332, -10 )
 frames = SubResource( 5 )
 animation = "Animate"
-frame = 1
 playing = true
 
 [node name="ShadowSprite" type="AnimatedSprite" parent="."]
@@ -72,6 +71,7 @@ modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 0.473335, -8.15778 )
 frames = SubResource( 8 )
 animation = "Animate"
+frame = 1
 playing = true
 
 [node name="BulletCollision" type="CollisionShape2D" parent="."]
@@ -84,5 +84,11 @@ collision_mask = 7
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( -0.149483, -10.9926 )
 shape = SubResource( 10 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="HitBox"]

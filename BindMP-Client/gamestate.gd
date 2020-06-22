@@ -83,4 +83,4 @@ puppet func pre_start_game():
 
 puppet func fire(pos,dir):
 	rpc_id(1,"fire_bullet",pos,dir)
- 
+
